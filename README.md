@@ -21,7 +21,7 @@ Analyse de 1 000 projets historiques (2018–2023) pour modéliser et prédire l
 
 **Technologies** : Python, pandas, scikit-learn, SQL, Power BI, Matplotlib, Seaborn
 
-📄 [Rapport du projet](Projet%201%20-%20Analyse%20des%20Donn%C3%A9es%20de%20Construction/RAPPORT_ANALYSE_CONSTRUCTION.html)
+🔗 **[Dépôt GitHub](https://github.com/JulesThesyC/Analyse-Donnees-Construction)** | 📄 [Rapport du projet](Projet%201%20-%20Analyse%20des%20Donn%C3%A9es%20de%20Construction/RAPPORT_ANALYSE_CONSTRUCTION.html)
 
 ---
 
@@ -40,7 +40,7 @@ Système end-to-end de collecte et d'analyse de données de capteurs (températu
 
 **Technologies** : Apache Kafka, AWS S3, Apache Airflow, Streamlit, Plotly, Python
 
-📄 [Rapport du projet](Projet%202%20-%20Trafic%20de%20Donn%C3%A9es%20Internet%20des%20Objets%20(IoT)/docs/PROJET_REPORT.html)
+🔗 **[Dépôt GitHub](https://github.com/JulesThesyC/Surveillance-IoT)** | 📄 [Rapport du projet](Projet%202%20-%20Trafic%20de%20Donn%C3%A9es%20Internet%20des%20Objets%20(IoT)/docs/PROJET_REPORT.html)
 
 ---
 
@@ -58,7 +58,7 @@ Système de recommandation collaboratif (User-Based Collaborative Filtering) pou
 
 **Technologies** : Python, pandas, scikit-learn, SQL, Flask, SQLite
 
-📄 [Rapport du projet](Projet%203%20-%20Syst%C3%A8me%20de%20Recommandation%20pour%20un%20Service%20de%20Streaming/rapport.html)
+🔗 **[Dépôt GitHub](https://github.com/JulesThesyC/Recommandation-Streaming)** | 📄 [Rapport du projet](Projet%203%20-%20Syst%C3%A8me%20de%20Recommandation%20pour%20un%20Service%20de%20Streaming/rapport.html)
 
 ---
 
