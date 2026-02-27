@@ -117,3 +117,8 @@ Pour visualiser en local, ouvrir `index.html` dans un navigateur.
 ## Contact
 
 Intéressé par mon profil ? N'hésitez pas à me contacter pour discuter de ces projets en détail.
+
+- **Auteur** — Jules COLONAS
+- **Profil LinkedIn** — **href="https://www.linkedin.com/in/julescolonas**
+
+
