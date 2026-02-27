@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Data Engineer — Projets & Compétences</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a1a;
+            --bg-card: #12122a;
+            --bg-card-hover: #1a1a3e;
+            --accent-blue: #4f8cff;
+            --accent-cyan: #00d4aa;
+            --accent-purple: #a855f7;
+            --accent-orange: #ff8c42;
+            --accent-red: #ff4757;
+            --text-primary: #e8eaf6;
+            --text-secondary: #9fa8c7;
+            --text-muted: #636d8a;
+            --border: rgba(255,255,255,0.06);
+            --glow-blue: rgba(79,140,255,0.15);
+            --glow-cyan: rgba(0,212,170,0.15);
+            --glow-purple: rgba(168,85,247,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10,10,26,0.8);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--accent-cyan); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 6rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, var(--glow-blue) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 50%, var(--glow-purple) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 80%, var(--glow-cyan) 0%, transparent 50%);
+            animation: heroGlow 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-3%, 3%) rotate(3deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid var(--accent-cyan);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.15s both;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.45s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(79,140,255,0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(79,140,255,0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn-outline:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* ── STATS BAR ── */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            padding: 2.5rem 2rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-item { text-align: center; }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.2rem; }
+
+        /* ── SECTION ── */
+        .section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3.5rem; }
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+        }
+        .section-header p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+
+        /* ── PROJECT CARDS ── */
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 24px 24px 0 0;
+        }
+        .project-card.blue::before { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
+        .project-card.cyan::before { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); }
+        .project-card.purple::before { background: linear-gradient(90deg, var(--accent-purple), var(--accent-orange)); }
+
+        .project-card:hover {
+            border-color: rgba(255,255,255,0.12);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .project-number {
+            font-size: 5rem;
+            font-weight: 900;
+            opacity: 0.06;
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            line-height: 1;
+        }
+
+        .project-info { position: relative; z-index: 2; }
+
+        .project-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .tag-blue { background: rgba(79,140,255,0.15); color: var(--accent-blue); }
+        .tag-cyan { background: rgba(0,212,170,0.15); color: var(--accent-cyan); }
+        .tag-purple { background: rgba(168,85,247,0.15); color: var(--accent-purple); }
+
+        .project-info h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .project-info .desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-kpis {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .kpi-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.7rem 1rem;
+        }
+        .kpi-item .kpi-val {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+        .kpi-item .kpi-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-val.blue { color: var(--accent-blue); }
+        .kpi-val.cyan { color: var(--accent-cyan); }
+        .kpi-val.purple { color: var(--accent-purple); }
+
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .tech-tag {
+            padding: 0.3rem 0.7rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .project-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+        .btn-sm {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            border-radius: 10px;
+        }
+
+        /* ── PROJECT VISUAL ── */
+        .project-visual {
+            position: relative;
+            z-index: 2;
+        }
+
+        .visual-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.8rem;
+            position: relative;
+        }
+
+        .visual-card h4 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.2rem;
+        }
+
+        .visual-objectives { list-style: none; }
+        .visual-objectives li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .visual-objectives li:last-child { border-bottom: none; }
+        .visual-objectives .check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .check-blue { background: rgba(79,140,255,0.15); color: var(--accent-blue); }
+        .check-cyan { background: rgba(0,212,170,0.15); color: var(--accent-cyan); }
+        .check-purple { background: rgba(168,85,247,0.15); color: var(--accent-purple); }
+
+        .visual-results {
+            margin-top: 1.2rem;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 0.88rem;
+        }
+        .results-blue { background: rgba(79,140,255,0.08); border: 1px solid rgba(79,140,255,0.15); }
+        .results-cyan { background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.15); }
+        .results-purple { background: rgba(168,85,247,0.08); border: 1px solid rgba(168,85,247,0.15); }
+
+        .visual-results strong { color: var(--text-primary); }
+
+        /* ── SKILLS ── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.8rem;
+            transition: all 0.3s;
+        }
+        .skill-card:hover {
+            border-color: rgba(255,255,255,0.12);
+            transform: translateY(-3px);
+        }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h4 { font-weight: 700; margin-bottom: 0.5rem; }
+        .skill-card p { font-size: 0.88rem; color: var(--text-secondary); }
+
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+        .skill-tag {
+            padding: 0.2rem 0.6rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ── CTA / CONTACT ── */
+        .cta-section {
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .cta-box {
+            max-width: 700px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--bg-card), rgba(79,140,255,0.08));
+            border: 1px solid rgba(79,140,255,0.2);
+            border-radius: 24px;
+            padding: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--glow-blue), transparent);
+            pointer-events: none;
+        }
+
+        .cta-box h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .cta-box p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .project-card {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10,10,26,0.95);
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border);
+                backdrop-filter: blur(20px);
+            }
+            .stats-bar { gap: 1.5rem; }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .project-kpis { grid-template-columns: 1fr; }
+            .section { padding: 3rem 1.2rem; }
+            .cta-box { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="navbar">
+    <div class="nav-logo">&#9670; Portfolio Data</div>
+    <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+    <div class="hero-content">
+        <div class="hero-badge">Data Engineer &middot; Data Manager</div>
+        <h1>
+            Transformer la donnée<br>
+            en <span class="gradient-text">décisions stratégiques</span>
+        </h1>
+        <p>
+            3 projets concrets alliant ingénierie des données, modélisation prédictive et visualisation. Découvrez mon approche technique et orientée résultats.
+        </p>
+        <div class="hero-cta">
+            <a href="#projets" class="btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                Voir les projets
+            </a>
+            <a href="#contact" class="btn btn-outline">Me contacter</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ STATS BAR ═══ -->
+<div class="stats-bar">
+    <div class="stat-item animate-on-scroll">
+        <div class="stat-value" data-count="3">0</div>
+        <div class="stat-label">Projets réalisés</div>
+    </div>
+    <div class="stat-item animate-on-scroll">
+        <div class="stat-value" data-count="10">0</div>
+        <div class="stat-label">Technologies maîtrisées</div>
+    </div>
+    <div class="stat-item animate-on-scroll">
+        <div class="stat-value special" data-suffix="M€" data-count="77">0</div>
+        <div class="stat-label">Économies potentielles identifiées</div>
+    </div>
+    <div class="stat-item animate-on-scroll">
+        <div class="stat-value" data-suffix="%" data-count="99">0</div>
+        <div class="stat-label">Couverture catalogue (recommandation)</div>
+    </div>
+</div>
+
+<!-- ═══ PROJETS ═══ -->
+<section class="section" id="projets">
+    <div class="section-header animate-on-scroll">
+        <h2>Projets Data Engineering</h2>
+        <p>Chaque projet illustre une compétence clé : de la collecte de données brutes à la livraison de résultats exploitables.</p>
+    </div>
+
+    <div class="projects-grid">
+
+        <!-- ── PROJET 1 ── -->
+        <div class="project-card blue animate-on-scroll">
+            <div class="project-number">01</div>
+            <div class="project-info">
+                <span class="project-tag tag-blue">Prédiction &middot; Machine Learning</span>
+                <h3>Analyse des Données de Construction</h3>
+                <p class="desc">
+                    Analyse de 1 000 projets historiques (2018–2023) pour modéliser et prédire les coûts de chantier. Identification de <strong>77,4 M€ d'économies potentielles</strong> grâce à un modèle Random Forest (R² = 0.999).
+                </p>
+                <div class="project-kpis">
+                    <div class="kpi-item">
+                        <div class="kpi-val blue">1 000</div>
+                        <div class="kpi-label">Projets analysés</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val blue">R² 0.999</div>
+                        <div class="kpi-label">Random Forest</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val blue">77,4 M€</div>
+                        <div class="kpi-label">Économies identifiées</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val blue">7</div>
+                        <div class="kpi-label">Visualisations</div>
+                    </div>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">pandas</span>
+                    <span class="tech-tag">scikit-learn</span>
+                    <span class="tech-tag">SQL</span>
+                    <span class="tech-tag">Power BI</span>
+                    <span class="tech-tag">Matplotlib</span>
+                    <span class="tech-tag">Seaborn</span>
+                </div>
+                <div class="project-actions">
+                    <a href="Projet 1 - Analyse des Données de Construction/RAPPORT_ANALYSE_CONSTRUCTION.html" class="btn btn-primary btn-sm" target="_blank">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        Voir le rapport
+                    </a>
+                    <a href="Projet 1 - Analyse des Données de Construction/" class="btn btn-outline btn-sm" target="_blank">Explorer le code</a>
+                </div>
+            </div>
+            <div class="project-visual">
+                <div class="visual-card">
+                    <h4>Objectifs atteints</h4>
+                    <ul class="visual-objectives">
+                        <li><span class="check check-blue">&#10003;</span> Collecte de données : 1 000 projets, 6 ans d'historique</li>
+                        <li><span class="check check-blue">&#10003;</span> Nettoyage et feature engineering (coût/jour, ratios)</li>
+                        <li><span class="check check-blue">&#10003;</span> Modèle de régression + Random Forest</li>
+                        <li><span class="check check-blue">&#10003;</span> Pipeline SQL + export Power BI</li>
+                    </ul>
+                    <div class="visual-results results-blue">
+                        <strong>Résultat clé :</strong> Materials_Cost et Labor_Cost identifiés comme principaux leviers. Économie de 77,4 M€ en alignant les projets sur la médiane du coût/jour.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PROJET 2 ── -->
+        <div class="project-card cyan animate-on-scroll">
+            <div class="project-number">02</div>
+            <div class="project-info">
+                <span class="project-tag tag-cyan">IoT &middot; Temps Réel &middot; Data Lake</span>
+                <h3>Surveillance Environnementale IoT</h3>
+                <p class="desc">
+                    Système end-to-end de collecte et d'analyse de données de capteurs environnementaux (température, humidité, pollution) avec pipeline ETL, Data Lake et dashboard interactif en temps réel.
+                </p>
+                <div class="project-kpis">
+                    <div class="kpi-item">
+                        <div class="kpi-val cyan">3</div>
+                        <div class="kpi-label">Types de capteurs</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val cyan">Parquet</div>
+                        <div class="kpi-label">Format Data Lake</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val cyan">Temps réel</div>
+                        <div class="kpi-label">Monitoring</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val cyan">Alertes</div>
+                        <div class="kpi-label">Seuils critiques</div>
+                    </div>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">Apache Kafka</span>
+                    <span class="tech-tag">AWS S3</span>
+                    <span class="tech-tag">Apache Airflow</span>
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">Plotly</span>
+                    <span class="tech-tag">Python</span>
+                </div>
+                <div class="project-actions">
+                    <a href="Projet 2 - Trafic de Données Internet des Objets (IoT)/docs/PROJET_REPORT.html" class="btn btn-primary btn-sm" target="_blank" style="background: linear-gradient(135deg, var(--accent-cyan), #00b894);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        Voir le rapport
+                    </a>
+                    <a href="Projet 2 - Trafic de Données Internet des Objets (IoT)/" class="btn btn-outline btn-sm" target="_blank">Explorer le code</a>
+                </div>
+            </div>
+            <div class="project-visual">
+                <div class="visual-card">
+                    <h4>Architecture déployée</h4>
+                    <ul class="visual-objectives">
+                        <li><span class="check check-cyan">&#10003;</span> Pipeline ETL complet (Extract → Transform → Load)</li>
+                        <li><span class="check check-cyan">&#10003;</span> Stockage Data Lake Parquet (structure YYYY/MM/DD)</li>
+                        <li><span class="check check-cyan">&#10003;</span> Kafka Producer/Consumer pour le streaming</li>
+                        <li><span class="check check-cyan">&#10003;</span> Dashboard interactif Streamlit + alertes seuils</li>
+                        <li><span class="check check-cyan">&#10003;</span> Orchestration Airflow (DAG quotidien)</li>
+                    </ul>
+                    <div class="visual-results results-cyan">
+                        <strong>Architecture :</strong> [Capteurs] → Kafka → ETL Pipeline → Data Lake S3 → Dashboard Streamlit, orchestré par Airflow.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PROJET 3 ── -->
+        <div class="project-card purple animate-on-scroll">
+            <div class="project-number">03</div>
+            <div class="project-info">
+                <span class="project-tag tag-purple">Recommandation &middot; ML &middot; API</span>
+                <h3>Système de Recommandation Streaming</h3>
+                <p class="desc">
+                    Système de recommandation collaboratif (User-Based Collaborative Filtering) pour un service de streaming vidéo. Analyse de 436 utilisateurs et 198 films pour des recommandations personnalisées via API Flask.
+                </p>
+                <div class="project-kpis">
+                    <div class="kpi-item">
+                        <div class="kpi-val purple">436</div>
+                        <div class="kpi-label">Utilisateurs</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val purple">198</div>
+                        <div class="kpi-label">Films</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val purple">87%</div>
+                        <div class="kpi-label">Taux d'engagement</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val purple">99%</div>
+                        <div class="kpi-label">Couverture catalogue</div>
+                    </div>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">pandas</span>
+                    <span class="tech-tag">scikit-learn</span>
+                    <span class="tech-tag">SQL</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">SQLite</span>
+                </div>
+                <div class="project-actions">
+                    <a href="Projet 3 - Système de Recommandation pour un Service de Streaming/rapport.html" class="btn btn-primary btn-sm" target="_blank" style="background: linear-gradient(135deg, var(--accent-purple), #7c3aed);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        Voir le rapport
+                    </a>
+                    <a href="Projet 3 - Système de Recommandation pour un Service de Streaming/" class="btn btn-outline btn-sm" target="_blank">Explorer le code</a>
+                </div>
+            </div>
+            <div class="project-visual">
+                <div class="visual-card">
+                    <h4>Pipeline complet</h4>
+                    <ul class="visual-objectives">
+                        <li><span class="check check-purple">&#10003;</span> Ingestion CSV → Base SQL (SQLite)</li>
+                        <li><span class="check check-purple">&#10003;</span> Analyse exploratoire (genres, notes, activité)</li>
+                        <li><span class="check check-purple">&#10003;</span> Modèle collaboratif (similarité cosinus)</li>
+                        <li><span class="check check-purple">&#10003;</span> Validation croisée 5-fold (RMSE : 2.17)</li>
+                        <li><span class="check check-purple">&#10003;</span> API REST Flask pour servir les recommandations</li>
+                    </ul>
+                    <div class="visual-results results-purple">
+                        <strong>Impact :</strong> RMSE de 2.17 (±0.45), couverture 99% du catalogue, taux d'engagement simulé de 87%. Pipeline complet de bout en bout.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══ COMPÉTENCES ═══ -->
+<section class="section" id="competences">
+    <div class="section-header animate-on-scroll">
+        <h2>Compétences Techniques</h2>
+        <p>Les technologies et méthodologies mobilisées à travers ces projets.</p>
+    </div>
+
+    <div class="skills-grid">
+        <div class="skill-card animate-on-scroll">
+            <div class="skill-icon" style="background: rgba(79,140,255,0.12); color: var(--accent-blue);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h4>Langages & Analyse</h4>
+            <p>Développement de pipelines d'analyse et de modèles prédictifs.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">pandas</span>
+                <span class="skill-tag">NumPy</span>
+            </div>
+        </div>
+
+        <div class="skill-card animate-on-scroll">
+            <div class="skill-icon" style="background: rgba(0,212,170,0.12); color: var(--accent-cyan);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h4>Machine Learning</h4>
+            <p>Régression, classification, systèmes de recommandation, validation croisée.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">scikit-learn</span>
+                <span class="skill-tag">Random Forest</span>
+                <span class="skill-tag">Collaborative Filtering</span>
+            </div>
+        </div>
+
+        <div class="skill-card animate-on-scroll">
+            <div class="skill-icon" style="background: rgba(168,85,247,0.12); color: var(--accent-purple);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <h4>Data Engineering</h4>
+            <p>Pipelines ETL, streaming, orchestration et stockage distribué.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">Apache Kafka</span>
+                <span class="skill-tag">Apache Airflow</span>
+                <span class="skill-tag">AWS S3</span>
+                <span class="skill-tag">ETL</span>
+            </div>
+        </div>
+
+        <div class="skill-card animate-on-scroll">
+            <div class="skill-icon" style="background: rgba(255,140,66,0.12); color: var(--accent-orange);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <h4>Visualisation & BI</h4>
+            <p>Dashboards interactifs, rapports visuels et communication des résultats.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">Power BI</span>
+                <span class="skill-tag">Streamlit</span>
+                <span class="skill-tag">Plotly</span>
+                <span class="skill-tag">Matplotlib</span>
+                <span class="skill-tag">Seaborn</span>
+            </div>
+        </div>
+
+        <div class="skill-card animate-on-scroll">
+            <div class="skill-icon" style="background: rgba(255,71,87,0.12); color: var(--accent-red);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <h4>Bases de Données</h4>
+            <p>Modélisation, requêtes analytiques, stockage structuré et Data Lake.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">SQLite</span>
+                <span class="skill-tag">Parquet</span>
+                <span class="skill-tag">Data Lake</span>
+            </div>
+        </div>
+
+        <div class="skill-card animate-on-scroll">
+            <div class="skill-icon" style="background: rgba(79,140,255,0.12); color: var(--accent-blue);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h4>API & Déploiement</h4>
+            <p>Création d'APIs REST et mise en production de modèles ML.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">Flask</span>
+                <span class="skill-tag">REST API</span>
+                <span class="skill-tag">Streamlit</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="cta-section" id="contact">
+    <div class="cta-box animate-on-scroll">
+        <h2>Intéressé par mon profil ?</h2>
+        <p>
+            Je suis disponible pour discuter de ces projets en détail, présenter mon approche technique et explorer les opportunités de collaboration.
+        </p>
+        <div class="cta-actions">
+            <a href="mailto:julesthesyc@gmail.com" class="btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Envoyer un email
+            </a>
+            <a href="https://www.linkedin.com/in/julescolonas" class="btn btn-outline" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+    <p>Portfolio Data Engineering &mdash; Conçu avec rigueur et passion pour la donnée.</p>
+</footer>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+(function() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 100);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+    function animateCounters() {
+        document.querySelectorAll('.stat-value[data-count]').forEach(el => {
+            const target = parseInt(el.dataset.count);
+            const suffix = el.dataset.suffix || '';
+            const duration = 2000;
+            const startTime = performance.now();
+
+            function tick(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.floor(target * eased) + suffix;
+                if (progress < 1) requestAnimationFrame(tick);
+                else el.textContent = target + suffix;
+            }
+            requestAnimationFrame(tick);
+        });
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    const statsBar = document.querySelector('.stats-bar');
+    if (statsBar) statsObserver.observe(statsBar);
+
+    let lastScroll = 0;
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        const st = window.scrollY;
+        if (st > 100) {
+            nav.style.padding = '0.6rem 2rem';
+            nav.style.background = 'rgba(10,10,26,0.95)';
+        } else {
+            nav.style.padding = '1rem 2rem';
+            nav.style.background = 'rgba(10,10,26,0.8)';
+        }
+        lastScroll = st;
+    });
+})();
+</script>
+
+</body>
+</html>

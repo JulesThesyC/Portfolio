@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.db
+*.parquet
+.env
+.DS_Store
+Thumbs.db

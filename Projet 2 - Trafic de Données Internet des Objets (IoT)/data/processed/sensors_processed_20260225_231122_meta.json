@@ -1,0 +1,22 @@
+{
+  "rows": 1008,
+  "processed_at": "2026-02-25T23:11:22.381896",
+  "columns": [
+    "Timestamp",
+    "Location",
+    "Temperature",
+    "Humidity",
+    "Pollution_Level",
+    "date",
+    "hour",
+    "temp_alert",
+    "humidity_alert",
+    "pollution_critical",
+    "pollution_warning",
+    "has_alert"
+  ],
+  "date_range": {
+    "min": "2023-01-01 00:00:00",
+    "max": "2023-01-07 23:50:00"
+  }
+}

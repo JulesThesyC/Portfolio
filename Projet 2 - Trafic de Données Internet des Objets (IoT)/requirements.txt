@@ -1,0 +1,19 @@
+# Surveillance Environnementale IoT - Dépendances
+# Python 3.9+
+
+# ETL & Données
+pandas>=2.0.0
+pyarrow>=12.0.0
+
+# Kafka
+kafka-python>=2.0.2
+
+# Dashboard
+streamlit>=1.28.0
+plotly>=5.18.0
+
+# Data Lake (optionnel - AWS S3)
+boto3>=1.28.0
+
+# Apache Airflow (optionnel - installer séparément si besoin)
+# apache-airflow>=2.7.0

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport - Optimisation des coûts construction</title>
+    <style>
+        :root {
+            --primary: #2E86AB;
+            --secondary: #A23B72;
+            --accent: #F18F01;
+            --text: #2c3e50;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 2rem; text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 1.8rem; font-weight: 600; margin-bottom: 0.5rem; }
+        header p { opacity: 0.9; font-size: 0.95rem; }
+        h2 { color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--primary); }
+        h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem; }
+        p { margin-bottom: 0.8rem; }
+        ul { margin: 0.5rem 0 1rem 1.5rem; }
+        .card { background: var(--card); padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 1.5rem; }
+        .stats { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
+        .stat { background: var(--bg); padding: 1rem 1.5rem; border-radius: 6px; flex: 1; min-width: 150px; text-align: center; }
+        .stat strong { display: block; font-size: 1.5rem; color: var(--primary); }
+        .stat span { font-size: 0.85rem; color: #666; }
+        img { max-width: 100%; height: auto; border-radius: 6px; margin: 0.5rem 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.6rem; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: var(--primary); color: white; }
+        .cta { background: linear-gradient(135deg, var(--accent), #e67e22); color: white; padding: 2rem; border-radius: 8px; text-align: center; margin-top: 2rem; }
+        .cta p { margin: 0.5rem 0; font-size: 1.05rem; }
+        .cta strong { font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Optimisation des coûts et de la durée des chantiers</h1>
+        <p>Projet Data Engineering | Rapport d'analyse des projets de construction</p>
+    </header>
+
+    <div class="container">
+        <h2>A. Description</h2>
+        <p>Analyse des données historiques de 1 000 projets de construction pour identifier des tendances et créer un modèle prédictif de coûts.</p>
+
+        <h2>B. Objectifs atteints</h2>
+        <ul>
+            <li><strong>Collecte :</strong> Données temps, coûts, ressources</li>
+            <li><strong>Nettoyage :</strong> Transformation et feature engineering</li>
+            <li><strong>Modèle :</strong> Régression pour prédire les coûts futurs</li>
+        </ul>
+
+        <h2>C. Indicateurs clés</h2>
+        <div class="stats">
+            <div class="stat"><strong>1 000</strong><span>Projets analysés</span></div>
+            <div class="stat"><strong>77,4 M€</strong><span>Économies potentielles</span></div>
+            <div class="stat"><strong>500</strong><span>Projets à optimiser</span></div>
+        </div>
+
+        <h2>D. Visualisations</h2>
+        
+        <h3>1. Distribution des coûts</h3>
+        <img src="outputs/01_distribution_couts.png" alt="Distribution des coûts" width="100%">
+        
+        <h3>2. Relation Durée - Coût</h3>
+        <img src="outputs/02_cout_vs_duree.png" alt="Durée vs Coût" width="100%">
+        
+        <h3>3. Matériaux vs Main d'œuvre</h3>
+        <img src="outputs/03_materiaux_vs_labor.png" alt="Matériaux vs Labor" width="100%">
+        
+        <h3>4. Évolution annuelle</h3>
+        <img src="outputs/04_evolution_annuelle.png" alt="Évolution" width="100%">
+        
+        <h3>5. Matrice de corrélation</h3>
+        <img src="outputs/05_correlation_matrix.png" alt="Corrélation" width="100%">
+        
+        <h3>6. Prédictions du modèle</h3>
+        <img src="outputs/06_predictions_modele.png" alt="Prédictions" width="100%">
+        
+        <h3>7. Importance des variables</h3>
+        <img src="outputs/07_importance_variables.png" alt="Importance" width="100%">
+
+        <h2>E. Technologies</h2>
+        <table>
+            <tr><th>Composant</th><th>Technologie</th></tr>
+            <tr><td>Analyse</td><td>Python, pandas, scikit-learn</td></tr>
+            <tr><td>Données</td><td>SQL</td></tr>
+            <tr><td>Visualisation</td><td>Matplotlib, Seaborn, Power BI</td></tr>
+        </table>
+
+        <h2>F. Recommandations</h2>
+        <ul>
+            <li>Mettre en place un suivi en temps réel des coûts par projet</li>
+            <li>Utiliser le modèle prédictif dès la phase de planification</li>
+            <li>Créer des dashboards Power BI pour le pilotage</li>
+        </ul>
+
+        <div class="cta">
+            <p><strong>Call to Action</strong></p>
+            <p>Vous souhaitez échanger sur ce projet ?</p>
+            <p>Je serais ravi de vous présenter l'approche technique, les choix de modélisation et les pistes d'amélioration.</p>
+            <p><strong>N'hésitez pas à me contacter pour en discuter.</strong></p>
+            <p><strong>Auteur | Jules COLONAS</strong></p>
+            <p>Profil LinkedIn | <a href="https://www.linkedin.com/in/julescolonas/"> Jules COLONAS</a></p>
+        </div>
+    </div>
+</body>
+</html>

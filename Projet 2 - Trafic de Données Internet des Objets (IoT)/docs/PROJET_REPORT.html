@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport — Surveillance Environnementale IoT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyan: #00d4aa;
+            --dark: #0a1628;
+            --bg: #f0f4f8;
+            --card: #ffffff;
+            --text: #2d3748;
+            --muted: #718096;
+            --border: #e2e8f0;
+            --green: #38a169;
+            --orange: #ed8936;
+            --red: #e53e3e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+        .cover {
+            background: linear-gradient(135deg, var(--dark), #1a365d, #0d9488);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .cover h1 { font-size: 2.6rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .cover h1 span { color: var(--cyan); }
+        .cover .subtitle { font-size: 1.15rem; font-weight: 300; opacity: 0.9; margin-bottom: 1rem; }
+        .cover .meta { font-size: 0.9rem; opacity: 0.7; }
+
+        .container { max-width: 960px; margin: 0 auto; padding: 2rem; }
+
+        .section {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+        }
+
+        .section h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--cyan);
+            display: inline-block;
+        }
+
+        .section h3 { font-size: 1.05rem; font-weight: 600; margin: 1.2rem 0 0.5rem; color: var(--dark); }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .kpi {
+            background: linear-gradient(135deg, var(--dark), #1a365d);
+            color: white;
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .kpi .value { font-size: 1.6rem; font-weight: 800; color: var(--cyan); }
+        .kpi .label { font-size: 0.8rem; opacity: 0.8; margin-top: 0.3rem; }
+
+        .arch-block {
+            background: var(--dark);
+            color: #a0aec0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            line-height: 1.8;
+            text-align: center;
+        }
+        .arch-block .highlight { color: var(--cyan); font-weight: 700; }
+
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.6rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { font-size: 0.8rem; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+        tr:hover { background: #f7fafc; }
+
+        ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+        li { margin-bottom: 0.3rem; }
+
+        .alert-table th { background: #f7fafc; }
+        .alert-critical { color: var(--red); font-weight: 700; }
+        .alert-ok { color: var(--green); }
+
+        .highlight-box {
+            background: #e6fffa;
+            border-left: 4px solid var(--cyan);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, var(--cyan), #0d9488);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+        }
+        .cta h2 { color: white; border-bottom: none; font-size: 1.5rem; }
+        .cta p { opacity: 0.95; margin-top: 0.5rem; font-size: 1.05rem; }
+
+        @media print {
+            .section { break-inside: avoid; }
+            body { font-size: 11pt; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="cover">
+    <h1>Surveillance <span>Environnementale</span> IoT</h1>
+    <div class="subtitle">Collecte et analyse de données de capteurs en temps réel</div>
+    <div class="meta">
+        Projet Data Engineering | Apache Kafka, AWS S3, Airflow, Streamlit<br>
+        Data Manager / Data Engineer
+    </div>
+</div>
+
+<div class="container">
+
+<div class="section">
+    <h2>1. Contexte et Objectifs</h2>
+    <p>Système de collecte et d'analyse de données provenant de <strong>capteurs environnementaux</strong> (température, humidité, pollution) dans une ville, avec surveillance en temps réel.</p>
+
+    <div class="kpi-grid">
+        <div class="kpi"><div class="value">3</div><div class="label">Types de capteurs</div></div>
+        <div class="kpi"><div class="value">ETL</div><div class="label">Pipeline complet</div></div>
+        <div class="kpi"><div class="value">Parquet</div><div class="label">Format Data Lake</div></div>
+        <div class="kpi"><div class="value">Temps réel</div><div class="label">Monitoring</div></div>
+    </div>
+
+    <div class="highlight-box">
+        <strong>Objectifs atteints :</strong>
+        <ul>
+            <li>Pipeline ETL pour intégrer les données des capteurs</li>
+            <li>Stockage Data Lake (local et S3 prêt)</li>
+            <li>Dashboard interactif avec tendances et alertes</li>
+        </ul>
+    </div>
+</div>
+
+<div class="section">
+    <h2>2. Architecture</h2>
+    <div class="arch-block">
+        <span class="highlight">[Capteurs IoT]</span> &rarr; <span class="highlight">[Apache Kafka]</span> &rarr; <span class="highlight">[ETL Pipeline]</span> &rarr; <span class="highlight">[Data Lake / S3]</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">[Dashboard Streamlit]</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&uarr;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">[Apache Airflow - DAG]</span>
+    </div>
+</div>
+
+<div class="section">
+    <h2>3. Technologies</h2>
+    <table>
+        <thead>
+            <tr><th>Composant</th><th>Technologie</th><th>Rôle</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Streaming</td><td><strong>Apache Kafka</strong></td><td>Ingestion temps réel</td></tr>
+            <tr><td>Stockage</td><td><strong>AWS S3 / Data Lake local</strong></td><td>Persistance données</td></tr>
+            <tr><td>Orchestration</td><td><strong>Apache Airflow</strong></td><td>Planification ETL quotidien</td></tr>
+            <tr><td>Visualisation</td><td><strong>Streamlit + Plotly</strong></td><td>Dashboard interactif</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section">
+    <h2>4. Pipeline ETL</h2>
+
+    <h3>Extract</h3>
+    <ul>
+        <li>Lecture du CSV des capteurs ou des fichiers bruts</li>
+        <li>Conversion des timestamps</li>
+    </ul>
+
+    <h3>Transform</h3>
+    <ul>
+        <li>Validation des types (température, humidité, pollution)</li>
+        <li>Enrichissement : date, heure, flags d'alerte</li>
+        <li>Détection des seuils critiques</li>
+    </ul>
+
+    <h3>Load</h3>
+    <ul>
+        <li>Écriture en Parquet dans le Data Lake</li>
+        <li>Structure : <code>data_lake/YYYY/MM/DD/iot_sensors_*.parquet</code></li>
+    </ul>
+</div>
+
+<div class="section">
+    <h2>5. Seuils d'Alerte</h2>
+    <table class="alert-table">
+        <thead>
+            <tr><th>Métrique</th><th>Min</th><th>Max</th><th>Alerte critique</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Température</td><td>-5°C</td><td>35°C</td><td class="alert-ok">&mdash;</td></tr>
+            <tr><td>Humidité</td><td>20%</td><td>90%</td><td class="alert-ok">&mdash;</td></tr>
+            <tr><td>Pollution</td><td>&mdash;</td><td>&mdash;</td><td class="alert-critical">&ge; 8</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section">
+    <h2>6. Visualisations et Résultats</h2>
+
+    <h3>Dashboard</h3>
+    <ul>
+        <li><strong>KPIs</strong> : nombre d'enregistrements, moyennes, alertes</li>
+        <li><strong>Graphiques</strong> :
+            <ul>
+                <li>Évolution température / humidité / pollution par zone</li>
+                <li>Barres de pollution moyenne par zone</li>
+                <li>Radar de comparaison par zone</li>
+                <li>Heatmap température (heure &times; zone)</li>
+            </ul>
+        </li>
+        <li><strong>Alertes</strong> : tableau des événements hors seuils</li>
+    </ul>
+
+    <h3>Tendances observées</h3>
+    <ul>
+        <li>Variations de température selon les zones et l'heure</li>
+        <li>Humidité parfois hors plage recommandée</li>
+        <li>Pics de pollution (niveau &ge; 8) identifiés par zone</li>
+    </ul>
+</div>
+
+<div class="section">
+    <h2>7. Livrables</h2>
+    <ul>
+        <li>Code source : pipeline ETL, Kafka, Airflow, dashboard</li>
+        <li><code>requirements.txt</code> pour les dépendances</li>
+        <li>README avec instructions d'installation et d'exécution</li>
+        <li>Rapport projet (ce document)</li>
+    </ul>
+</div>
+
+<div class="cta">
+    <h2>Vous souhaitez en discuter ?</h2>
+    <p>Ce projet illustre une architecture Data Engineering pour l'IoT (ETL, streaming, Data Lake, orchestration, visualisation).<br>
+    Je suis disponible pour présenter l'architecture, les choix techniques et les pistes d'évolution.</p>
+</div>
+
+</div>
+
+</body>
+</html>
