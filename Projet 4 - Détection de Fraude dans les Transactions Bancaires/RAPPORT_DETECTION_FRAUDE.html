@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport — Détection de Fraude Bancaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #FF1744;
+            --orange: #FF9100;
+            --yellow: #FFD600;
+            --green: #00E676;
+            --accent: #6C63FF;
+            --dark: #0E1117;
+            --dark2: #1a1a2e;
+            --bg: #f0f2f5;
+            --card: #ffffff;
+            --text: #2d3748;
+            --muted: #718096;
+            --border: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+        .cover {
+            background: linear-gradient(135deg, var(--dark), var(--dark2), #1a0a2e);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(108,99,255,0.15), transparent 50%),
+                        radial-gradient(ellipse at 70% 50%, rgba(255,23,68,0.1), transparent 50%);
+        }
+        .cover * { position: relative; }
+        .cover h1 { font-size: 2.6rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .cover h1 span { color: var(--red); }
+        .cover .subtitle { font-size: 1.15rem; font-weight: 300; opacity: 0.9; margin-bottom: 1rem; }
+        .cover .meta { font-size: 0.9rem; opacity: 0.7; }
+
+        .container { max-width: 960px; margin: 0 auto; padding: 2rem; }
+
+        .section {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+        }
+
+        .section h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        .section h3 { font-size: 1.05rem; font-weight: 600; margin: 1.2rem 0 0.5rem; color: var(--dark); }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .kpi {
+            background: linear-gradient(135deg, var(--dark), var(--dark2));
+            color: white;
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .kpi .value { font-size: 1.6rem; font-weight: 800; }
+        .kpi .value.red { color: var(--red); }
+        .kpi .value.accent { color: var(--accent); }
+        .kpi .value.green { color: var(--green); }
+        .kpi .value.orange { color: var(--orange); }
+        .kpi .label { font-size: 0.78rem; opacity: 0.8; margin-top: 0.3rem; }
+
+        .arch-block {
+            background: var(--dark);
+            color: #a0aec0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            line-height: 1.9;
+        }
+        .arch-block .hl { color: var(--accent); font-weight: 700; }
+        .arch-block .hl-red { color: var(--red); font-weight: 700; }
+
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.6rem 1rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+        th { font-size: 0.78rem; text-transform: uppercase; color: var(--muted); font-weight: 600; background: #f7fafc; }
+        tr:hover { background: #f7fafc; }
+
+        ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+        li { margin-bottom: 0.3rem; }
+
+        code {
+            background: #edf2f7;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .risk-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: white;
+        }
+        .risk-critical { background: var(--red); }
+        .risk-high { background: var(--orange); }
+        .risk-medium { background: var(--yellow); color: #333; }
+        .risk-low { background: var(--green); color: #333; }
+
+        .highlight-box {
+            border-left: 4px solid var(--accent);
+            background: #eef0ff;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+        .rule-card {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        .rule-card .rule-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.3rem; }
+        .rule-card .rule-desc { font-size: 0.83rem; color: var(--muted); }
+        .rule-card .rule-weight { font-size: 0.8rem; color: var(--accent); font-weight: 600; margin-top: 0.3rem; }
+
+        .cta {
+            background: linear-gradient(135deg, var(--accent), #4a42d1);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+        }
+        .cta h2 { color: white; border-bottom: none; font-size: 1.5rem; }
+        .cta p { opacity: 0.95; margin-top: 0.5rem; font-size: 1.05rem; }
+
+        @media (max-width: 600px) {
+            .rules-grid { grid-template-columns: 1fr; }
+            .cover h1 { font-size: 1.8rem; }
+        }
+        @media print {
+            .section { break-inside: avoid; }
+            body { font-size: 11pt; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="cover">
+    <h1>Détection de <span>Fraude</span><br>Transactions Bancaires</h1>
+    <div class="subtitle">Pipeline Data Engineering complet pour l'identification de transactions suspectes</div>
+    <div class="meta">
+        Projet Data Engineering | Python, PySpark, BigQuery, Airflow, Streamlit<br>
+        Jules COLONAS &mdash; Février 2025
+    </div>
+</div>
+
+<div class="container">
+
+<!-- 1. RÉSUMÉ -->
+<div class="section">
+    <h2>1. Résumé Exécutif</h2>
+    <p>Pipeline end-to-end de détection de fraude combinant <strong>6 règles heuristiques</strong> avec un système de <strong>scoring pondéré (0-100)</strong> pour qualifier chaque transaction bancaire avec un niveau de risque. Le système analyse <strong>25 000 transactions</strong> de <strong>5 000 utilisateurs</strong> et fournit des alertes en temps réel via un dashboard interactif.</p>
+
+    <div class="kpi-grid">
+        <div class="kpi"><div class="value red">25 000</div><div class="label">Transactions</div></div>
+        <div class="kpi"><div class="value accent">5 000</div><div class="label">Utilisateurs</div></div>
+        <div class="kpi"><div class="value orange">6</div><div class="label">Règles de détection</div></div>
+        <div class="kpi"><div class="value green">4</div><div class="label">Niveaux de risque</div></div>
+        <div class="kpi"><div class="value accent">5</div><div class="label">Onglets dashboard</div></div>
+    </div>
+
+    <div class="highlight-box">
+        <strong>Points clés :</strong>
+        <ul>
+            <li>Pipeline : CSV &rarr; Prétraitement &rarr; Feature Engineering &rarr; Détection &rarr; PySpark &rarr; BigQuery &rarr; Dashboard</li>
+            <li>Scoring pondéré avec matrice de confusion, Précision, Rappel, F1-Score</li>
+            <li>Orchestration Airflow avec contrôle qualité et branchement conditionnel</li>
+            <li>Dashboard Streamlit 5 onglets avec filtres dynamiques et export CSV</li>
+        </ul>
+    </div>
+</div>
+
+<!-- 2. ARCHITECTURE -->
+<div class="section">
+    <h2>2. Architecture</h2>
+    <div class="arch-block">
+<span class="hl">start</span> &rarr; <span class="hl">preprocess</span> &rarr; <span class="hl-red">detect</span> &rarr; <span class="hl">spark</span> &rarr; <span class="hl">load_bq</span> &rarr; <span class="hl">quality_check</span> &rarr; branch
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&boxur;&rarr; <span class="hl-red">critical_alert</span> &rarr; end
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&boxur;&rarr; <span class="hl">normal_report</span>&nbsp; &rarr; end
+    </div>
+</div>
+
+<!-- 3. TECHNOLOGIES -->
+<div class="section">
+    <h2>3. Technologies</h2>
+    <table>
+        <thead><tr><th>Composant</th><th>Technologie</th><th>Rôle</th></tr></thead>
+        <tbody>
+            <tr><td>Prétraitement</td><td><strong>Python / Pandas</strong></td><td>Nettoyage, feature engineering, détection heuristique</td></tr>
+            <tr><td>Traitement distribué</td><td><strong>PySpark</strong></td><td>Pipeline à grande échelle, export Parquet</td></tr>
+            <tr><td>Stockage cloud</td><td><strong>BigQuery</strong></td><td>3 tables, requêtes analytiques SQL</td></tr>
+            <tr><td>Orchestration</td><td><strong>Apache Airflow</strong></td><td>DAG horaire, contrôle qualité, branchement</td></tr>
+            <tr><td>Dashboard</td><td><strong>Streamlit + Plotly</strong></td><td>5 onglets interactifs, filtres, export</td></tr>
+            <tr><td>Métriques ML</td><td><strong>scikit-learn</strong></td><td>Matrice de confusion, Précision, Rappel, F1</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 4. DATASET -->
+<div class="section">
+    <h2>4. Dataset</h2>
+    <table>
+        <thead><tr><th>Colonne</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td><code>User_ID</code></td><td>String</td><td>Identifiant utilisateur (User_1 à User_5000)</td></tr>
+            <tr><td><code>Transaction_Time</code></td><td>Timestamp</td><td>Date et heure de la transaction</td></tr>
+            <tr><td><code>Amount</code></td><td>Float</td><td>Montant (0.01 - 10 000 &euro;)</td></tr>
+            <tr><td><code>Transaction_Type</code></td><td>String</td><td>DEPOSIT, WITHDRAWAL, TRANSFER</td></tr>
+            <tr><td><code>Location</code></td><td>String</td><td>ONLINE, ATM, BRANCH</td></tr>
+            <tr><td><code>Status</code></td><td>String</td><td>COMPLETED, PENDING, FAILED</td></tr>
+            <tr><td><code>Is_Fraud</code></td><td>String</td><td>YES / NO (label de référence)</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 5. PIPELINE ETL -->
+<div class="section">
+    <h2>5. Pipeline de Détection</h2>
+
+    <h3>Étape 1 — Prétraitement</h3>
+    <ul>
+        <li>Suppression des doublons, validation et conversion des types</li>
+        <li><strong>Feature engineering</strong> : variables temporelles (heure, jour, mois, weekend, nuit), catégorisation du montant, statistiques par utilisateur, Z-scores, comptage journalier</li>
+    </ul>
+
+    <h3>Étape 2 — Détection de fraude (6 règles)</h3>
+    <div class="rules-grid">
+        <div class="rule-card">
+            <div class="rule-name">R1 — Montant Élevé</div>
+            <div class="rule-desc">Montant &ge; 8 000 &euro;</div>
+            <div class="rule-weight">Poids : 25/100</div>
+        </div>
+        <div class="rule-card">
+            <div class="rule-name">R2 — Montant Extrême</div>
+            <div class="rule-desc">Montant &ge; 9 500 &euro;</div>
+            <div class="rule-weight">Poids : 15/100</div>
+        </div>
+        <div class="rule-card">
+            <div class="rule-name">R3 — Transaction Nocturne</div>
+            <div class="rule-desc">Heure entre 00h et 05h</div>
+            <div class="rule-weight">Poids : 15/100</div>
+        </div>
+        <div class="rule-card">
+            <div class="rule-name">R4 — En Ligne + Élevé</div>
+            <div class="rule-desc">Online + montant &ge; 7 000 &euro;</div>
+            <div class="rule-weight">Poids : 20/100</div>
+        </div>
+        <div class="rule-card">
+            <div class="rule-name">R5 — Anomalie Statistique</div>
+            <div class="rule-desc">Z-score global &ge; 2.5</div>
+            <div class="rule-weight">Poids : 15/100</div>
+        </div>
+        <div class="rule-card">
+            <div class="rule-name">R6 — Fréquence Élevée</div>
+            <div class="rule-desc">&ge; 5 transactions/jour/utilisateur</div>
+            <div class="rule-weight">Poids : 10/100</div>
+        </div>
+    </div>
+
+    <h3>Niveaux de risque</h3>
+    <p>
+        <span class="risk-badge risk-critical">CRITICAL &ge; 70</span>
+        <span class="risk-badge risk-high">HIGH &ge; 50</span>
+        <span class="risk-badge risk-medium">MEDIUM &ge; 30</span>
+        <span class="risk-badge risk-low">LOW &lt; 30</span>
+    </p>
+
+    <h3>Étape 3 — Traitement PySpark</h3>
+    <ul>
+        <li>Pipeline distribué reproduisant l'intégralité de la détection</li>
+        <li>Feature engineering via Window Functions</li>
+        <li>Export Parquet (optimisé BigQuery) et CSV</li>
+    </ul>
+
+    <h3>Étape 4 — BigQuery</h3>
+    <ul>
+        <li>3 tables : <code>raw_transactions</code>, <code>enriched_transactions</code>, <code>fraud_alerts</code></li>
+        <li>5 requêtes analytiques : résumé par risque, top 20 suspects, pattern horaire, tendance mensuelle, analyse croisée type &times; localisation</li>
+    </ul>
+
+    <h3>Étape 5 — Orchestration Airflow</h3>
+    <ul>
+        <li>Exécution planifiée : <code>@hourly</code></li>
+        <li>Communication inter-tâches via XCom</li>
+        <li>Contrôle qualité automatique + branchement conditionnel (alerte si taux > 10%)</li>
+        <li>Retry (2 tentatives), timeout 30 min, alertes email</li>
+    </ul>
+</div>
+
+<!-- 6. DASHBOARD -->
+<div class="section">
+    <h2>6. Dashboard Interactif</h2>
+    <p>Tableau de bord Streamlit avec <strong>5 onglets</strong> :</p>
+    <table>
+        <thead><tr><th>Onglet</th><th>Contenu</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Vue d'ensemble</strong></td><td>KPIs, répartition par risque/type/localisation, scatter plot</td></tr>
+            <tr><td><strong>Alertes</strong></td><td>Tableau CRITICAL/HIGH avec export CSV</td></tr>
+            <tr><td><strong>Tendances</strong></td><td>Analyse par heure, jour, mois avec taux de fraude</td></tr>
+            <tr><td><strong>Analyse Utilisateurs</strong></td><td>Top 20 suspects, recherche individuelle, profil complet</td></tr>
+            <tr><td><strong>Détail Règles</strong></td><td>Performance de chaque règle, corrélation entre règles</td></tr>
+        </tbody>
+    </table>
+    <p style="margin-top: 0.8rem; color: var(--muted); font-size: 0.9rem;">Filtres interactifs : niveau de risque, type, localisation, montant, période.</p>
+</div>
+
+<!-- 7. LIVRABLES -->
+<div class="section">
+    <h2>7. Livrables</h2>
+    <ul>
+        <li><code>src/data_preprocessing.py</code> — Nettoyage + feature engineering</li>
+        <li><code>src/fraud_detection.py</code> — Moteur de détection (6 règles + scoring)</li>
+        <li><code>src/spark_processing.py</code> — Pipeline distribué PySpark</li>
+        <li><code>src/bigquery_utils.py</code> — Intégration BigQuery</li>
+        <li><code>dags/fraud_detection_dag.py</code> — DAG Airflow</li>
+        <li><code>dashboard/app.py</code> — Dashboard Streamlit interactif</li>
+        <li><code>config/settings.py</code> — Configuration centralisée</li>
+    </ul>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+    <h2>Vous souhaitez en discuter ?</h2>
+    <p>Ce projet illustre un pipeline Data Engineering complet pour la détection de fraude (ETL, ML heuristique, traitement distribué, orchestration, visualisation).<br>
+    Je suis disponible pour présenter l'architecture, les choix techniques et les pistes d'évolution.</p>
+</div>
+
+</div>
+
+</body>
+</html>
