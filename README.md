@@ -1,8 +1,8 @@
-# Portfolio Data Engineer
+# Portfolio Data Engineer — Jules COLONAS
 
 > **[Voir la vitrine en ligne](https://julesthesyc.github.io/Portfolio/)**
 
-Portfolio regroupant 3 projets Data Engineering / Data Science, conçu pour mettre en avant des compétences techniques concrètes auprès de recruteurs.
+Portfolio regroupant 4 projets Data Engineering / Data Science, conçu pour mettre en avant des compétences techniques concrètes auprès de recruteurs.
 
 ---
 
@@ -62,16 +62,40 @@ Système de recommandation collaboratif (User-Based Collaborative Filtering) pou
 
 ---
 
+### 4. Détection de Fraude Bancaire
+**Thématique** : Identification de transactions suspectes en temps réel
+
+Pipeline end-to-end de détection de fraude combinant 6 règles heuristiques avec un système de scoring pondéré (0-100) sur 25 000 transactions de 5 000 utilisateurs. Dashboard Streamlit 5 onglets avec alertes temps réel.
+
+| Indicateur | Valeur |
+|---|---|
+| Transactions | 25 000 |
+| Utilisateurs | 5 000 |
+| Règles de détection | 6 |
+| Niveaux de risque | 4 (LOW → CRITICAL) |
+
+```
+start → preprocess → detect → spark → load_bq → quality_check → branch
+                                                                   ├→ critical_alert → end
+                                                                   └→ normal_report  → end
+```
+
+**Technologies** : Python, PySpark, BigQuery, Apache Airflow, Streamlit, Plotly, scikit-learn
+
+🔗 **[Dépôt GitHub](https://github.com/JulesThesyC/Detection-Fraude-Bancaire)** | 📄 [Rapport du projet](Projet%204%20-%20D%C3%A9tection%20de%20Fraude%20dans%20les%20Transactions%20Bancaires/RAPPORT_DETECTION_FRAUDE.html)
+
+---
+
 ## Stack technique globale
 
 | Domaine | Technologies |
 |---|---|
 | Langages & Analyse | Python, SQL, pandas, NumPy |
-| Machine Learning | scikit-learn, Random Forest, Collaborative Filtering |
-| Data Engineering | Apache Kafka, Apache Airflow, AWS S3, ETL, Parquet |
+| Machine Learning | scikit-learn, Random Forest, Collaborative Filtering, Scoring heuristique |
+| Data Engineering | Apache Kafka, Apache Airflow, PySpark, AWS S3, ETL, Parquet |
+| Cloud & Stockage | BigQuery, AWS S3, SQLite, Data Lake |
 | Visualisation & BI | Power BI, Streamlit, Plotly, Matplotlib, Seaborn |
 | API & Déploiement | Flask, REST API, Streamlit |
-| Bases de données | SQL, SQLite, Data Lake |
 
 ## Structure du dépôt
 
@@ -95,13 +119,21 @@ Portfolio/
 │   ├── docs/PROJET_REPORT.html
 │   └── data/                           ← Data Lake local (Parquet)
 │
-└── Projet 3 - Recommandation Streaming/
-    ├── app.py                          ← API Flask
-    ├── recommender.py                  ← Modèle collaboratif
-    ├── analysis.py                     ← Analyse exploratoire
-    ├── evaluation.py                   ← Métriques du modèle
-    ├── rapport.html
-    └── static/visualizations/          ← Graphiques de performance
+├── Projet 3 - Recommandation Streaming/
+│   ├── app.py                          ← API Flask
+│   ├── recommender.py                  ← Modèle collaboratif
+│   ├── analysis.py                     ← Analyse exploratoire
+│   ├── evaluation.py                   ← Métriques du modèle
+│   ├── rapport.html
+│   └── static/visualizations/          ← Graphiques de performance
+│
+└── Projet 4 - Détection de Fraude Bancaire/
+    ├── src/                            ← Prétraitement, détection, Spark, BigQuery
+    ├── dags/                           ← DAG Airflow (orchestration complète)
+    ├── dashboard/                      ← Dashboard Streamlit 5 onglets
+    ├── config/                         ← Configuration centralisée (seuils, chemins)
+    ├── RAPPORT_DETECTION_FRAUDE.html
+    └── data/                           ← Résultats et alertes
 ```
 
 ## Déploiement
@@ -119,6 +151,5 @@ Pour visualiser en local, ouvrir `index.html` dans un navigateur.
 Intéressé par mon profil ? N'hésitez pas à me contacter pour discuter de ces projets en détail.
 
 - **Auteur** — Jules COLONAS
-- **Profil LinkedIn** — **[Jules COLONAS](https://www.linkedin.com/in/julescolonas)**
-
-
+- **LinkedIn** — **[Jules COLONAS](https://www.linkedin.com/in/julescolonas)**
+- **GitHub** — **[JulesThesyC](https://github.com/JulesThesyC)**

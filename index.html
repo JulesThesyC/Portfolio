@@ -280,6 +280,12 @@
         .project-card.blue::before { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
         .project-card.cyan::before { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); }
         .project-card.purple::before { background: linear-gradient(90deg, var(--accent-purple), var(--accent-orange)); }
+        .project-card.red::before { background: linear-gradient(90deg, var(--accent-red), var(--accent-orange)); }
+
+        .tag-red { background: rgba(255,71,87,0.15); color: var(--accent-red); }
+        .kpi-val.red { color: var(--accent-red); }
+        .check-red { background: rgba(255,71,87,0.15); color: var(--accent-red); }
+        .results-red { background: rgba(255,71,87,0.08); border: 1px solid rgba(255,71,87,0.15); }
 
         .project-card:hover {
             border-color: rgba(255,255,255,0.12);
@@ -599,13 +605,13 @@
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="hero">
     <div class="hero-content">
-        <div class="hero-badge">Data Engineer &middot; Data Manager</div>
+        <div class="hero-badge">Jules COLONAS &middot; Data Engineer</div>
         <h1>
             Transformer la donnée<br>
             en <span class="gradient-text">décisions stratégiques</span>
         </h1>
         <p>
-            3 projets concrets alliant ingénierie des données, modélisation prédictive et visualisation. Découvrez mon approche technique et orientée résultats.
+            4 projets concrets alliant ingénierie des données, modélisation prédictive et visualisation. Découvrez mon approche technique et orientée résultats.
         </p>
         <div class="hero-cta">
             <a href="#projets" class="btn btn-primary">
@@ -620,16 +626,20 @@
 <!-- ═══ STATS BAR ═══ -->
 <div class="stats-bar">
     <div class="stat-item animate-on-scroll">
-        <div class="stat-value" data-count="3">0</div>
+        <div class="stat-value" data-count="4">0</div>
         <div class="stat-label">Projets réalisés</div>
     </div>
     <div class="stat-item animate-on-scroll">
-        <div class="stat-value" data-count="10">0</div>
+        <div class="stat-value" data-count="14">0</div>
         <div class="stat-label">Technologies maîtrisées</div>
     </div>
     <div class="stat-item animate-on-scroll">
         <div class="stat-value special" data-suffix="M€" data-count="77">0</div>
         <div class="stat-label">Économies potentielles identifiées</div>
+    </div>
+    <div class="stat-item animate-on-scroll">
+        <div class="stat-value" data-suffix="K" data-count="25">0</div>
+        <div class="stat-label">Transactions analysées (fraude)</div>
     </div>
     <div class="stat-item animate-on-scroll">
         <div class="stat-value" data-suffix="%" data-count="99">0</div>
@@ -826,6 +836,68 @@
             </div>
         </div>
 
+        <!-- ── PROJET 4 ── -->
+        <div class="project-card red animate-on-scroll">
+            <div class="project-number">04</div>
+            <div class="project-info">
+                <span class="project-tag tag-red">Fraude &middot; Scoring &middot; Big Data</span>
+                <h3>Détection de Fraude Bancaire</h3>
+                <p class="desc">
+                    Pipeline end-to-end de détection de fraude combinant <strong>6 règles heuristiques</strong> avec un système de scoring pondéré (0-100) sur <strong>25 000 transactions</strong> de 5 000 utilisateurs. Orchestration Airflow, traitement PySpark et dashboard temps réel.
+                </p>
+                <div class="project-kpis">
+                    <div class="kpi-item">
+                        <div class="kpi-val red">25 000</div>
+                        <div class="kpi-label">Transactions</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val red">5 000</div>
+                        <div class="kpi-label">Utilisateurs</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val red">6</div>
+                        <div class="kpi-label">Règles de détection</div>
+                    </div>
+                    <div class="kpi-item">
+                        <div class="kpi-val red">4</div>
+                        <div class="kpi-label">Niveaux de risque</div>
+                    </div>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">PySpark</span>
+                    <span class="tech-tag">BigQuery</span>
+                    <span class="tech-tag">Apache Airflow</span>
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">Plotly</span>
+                    <span class="tech-tag">scikit-learn</span>
+                </div>
+                <div class="project-actions">
+                    <a href="Projet 4 - Détection de Fraude dans les Transactions Bancaires/RAPPORT_DETECTION_FRAUDE.html" class="btn btn-primary btn-sm" target="_blank" style="background: linear-gradient(135deg, var(--accent-red), #c0392b);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        Voir le rapport
+                    </a>
+                    <a href="https://github.com/JulesThesyC/Detection-Fraude-Bancaire" class="btn btn-outline btn-sm" target="_blank">Explorer le code</a>
+                </div>
+            </div>
+            <div class="project-visual">
+                <div class="visual-card">
+                    <h4>Pipeline complet</h4>
+                    <ul class="visual-objectives">
+                        <li><span class="check check-red">&#10003;</span> Prétraitement + feature engineering (Z-scores, temporel)</li>
+                        <li><span class="check check-red">&#10003;</span> 6 règles heuristiques avec scoring pondéré (0-100)</li>
+                        <li><span class="check check-red">&#10003;</span> Traitement distribué PySpark + export Parquet</li>
+                        <li><span class="check check-red">&#10003;</span> Stockage BigQuery (3 tables, 5 requêtes analytiques)</li>
+                        <li><span class="check check-red">&#10003;</span> Orchestration Airflow (DAG horaire + contrôle qualité)</li>
+                        <li><span class="check check-red">&#10003;</span> Dashboard Streamlit 5 onglets avec alertes temps réel</li>
+                    </ul>
+                    <div class="visual-results results-red">
+                        <strong>Architecture :</strong> CSV &rarr; Pandas &rarr; Détection (6 règles) &rarr; PySpark &rarr; BigQuery &rarr; Dashboard Streamlit. Orchestration Airflow avec branchement conditionnel et alertes critiques.
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -873,6 +945,7 @@
             <div class="skill-tags">
                 <span class="skill-tag">Apache Kafka</span>
                 <span class="skill-tag">Apache Airflow</span>
+                <span class="skill-tag">PySpark</span>
                 <span class="skill-tag">AWS S3</span>
                 <span class="skill-tag">ETL</span>
             </div>
@@ -901,6 +974,7 @@
             <p>Modélisation, requêtes analytiques, stockage structuré et Data Lake.</p>
             <div class="skill-tags">
                 <span class="skill-tag">SQL</span>
+                <span class="skill-tag">BigQuery</span>
                 <span class="skill-tag">SQLite</span>
                 <span class="skill-tag">Parquet</span>
                 <span class="skill-tag">Data Lake</span>
@@ -938,13 +1012,17 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                 LinkedIn
             </a>
+            <a href="https://github.com/JulesThesyC" class="btn btn-outline" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                GitHub
+            </a>
         </div>
     </div>
 </section>
 
 <!-- ═══ FOOTER ═══ -->
 <footer>
-    <p>Portfolio Data Engineering &mdash; Conçu avec rigueur et passion pour la donnée.</p>
+    <p>Jules COLONAS &mdash; Portfolio Data Engineering &mdash; Conçu avec rigueur et passion pour la donnée.</p>
 </footer>
 
 <!-- ═══ SCRIPTS ═══ -->
