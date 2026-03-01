@@ -2,7 +2,7 @@
 
 > **[Voir la vitrine en ligne](https://julesthesyc.github.io/Portfolio/)**
 
-Portfolio regroupant 4 projets Data Engineering / Data Science, conçu pour mettre en avant des compétences techniques concrètes auprès de recruteurs.
+Portfolio regroupant 4 projets Data Engineering / Data Science, conçu pour mettre en avant mes compétences techniques concrètes auprès de recruteurs.
 
 ---
 
