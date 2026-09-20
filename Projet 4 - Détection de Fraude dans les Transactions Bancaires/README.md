@@ -175,9 +175,9 @@ python src/bigquery_utils.py
 streamlit run dashboard/app.py
 ```
 
-```
-Cliquer sur ce lien pour accéder au tableau de bord : **[Détection de Fraude — Transactions Bancaires](https://appfraudebancaire.streamlit.app/)**
-```
+
+- Cliquer sur ce lien pour accéder au tableau de bord : **[Détection de Fraude — Transactions Bancaires](https://appfraudebancaire.streamlit.app/)**
+
 
 ### 4. Configuration Airflow (optionnel)
 
